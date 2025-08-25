@@ -1,25 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dcx7xrowv2hpx"]
+[gd_scene load_steps=3 format=3 uid="uid://dcx7xrowv2hpx"]
 
 [ext_resource type="Script" uid="uid://c3yy1aag6g380" path="res://Sripts/main.gd" id="1_bo1nx"]
-[ext_resource type="AudioStream" uid="uid://bi05j0bvm1mcy" path="res://Sounds/Metronome.mp3" id="1_jjgbg"]
+[ext_resource type="Script" uid="uid://b0nd2jn3agump" path="res://Sripts/InputScroll.gd" id="2_bo1nx"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bo1nx"]
-bg_color = Color(0, 0, 0, 1)
-border_width_top = 18
-border_width_bottom = 18
-border_color = Color(0.8, 0.8, 0.8, 0)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8gbba"]
-border_width_top = 10
-border_width_bottom = 10
-border_color = Color(0.8, 0.8, 0.8, 0)
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_detail = 1
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jjvhh"]
-
-[node name="Main" type="Control" node_paths=PackedStringArray("BPMLabel", "ClickLabel", "BARUI", "ClickSound", "BarSound", "BeatPanelParent")]
+[node name="Main" type="Control" node_paths=PackedStringArray("BarParent", "BPMLabel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,20 +11,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_bo1nx")
-BPMLabel = NodePath("PanelContainer/VBoxContainer/HBoxContainer/Label")
-ClickLabel = NodePath("PanelContainer/VBoxContainer/HBoxContainer2/Label")
-BARUI = NodePath("PanelContainer/VBoxContainer/ProgressBar")
-ClickSound = NodePath("AudioStreamPlayer")
-BarSound = NodePath("AudioStreamPlayer2")
-BeatPanelParent = NodePath("PanelContainer/VBoxContainer/ProgressBar/HBoxContainer")
-BeatPanel = "uid://rvqfmt0odx5s"
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("1_jjgbg")
-
-[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("1_jjgbg")
-pitch_scale = 0.8
+BarParent = NodePath("PanelContainer/InputScroll/VBoxContainer/VBoxContainer2")
+BPMLabel = NodePath("PanelContainer/InputScroll/VBoxContainer/HBoxContainer/Label")
+BarScene = "uid://1e5ydqjjx32o"
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -50,140 +23,61 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="InputScroll" type="ScrollContainer" parent="PanelContainer"]
 layout_mode = 2
+script = ExtResource("2_bo1nx")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/InputScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 alignment = 1
 
-[node name="ProgressBar" type="ProgressBar" parent="PanelContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-theme_override_styles/background = SubResource("StyleBoxFlat_bo1nx")
-theme_override_styles/fill = SubResource("StyleBoxFlat_8gbba")
-value = 18.04
-show_percentage = false
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer/ProgressBar"]
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Panel" type="Panel" parent="PanelContainer/VBoxContainer/ProgressBar/HBoxContainer2"]
-custom_minimum_size = Vector2(2, 0)
-layout_mode = 2
-size_flags_horizontal = 10
-theme_override_styles/panel = SubResource("StyleBoxFlat_jjvhh")
-
-[node name="Panel2" type="Panel" parent="PanelContainer/VBoxContainer/ProgressBar/HBoxContainer2"]
-custom_minimum_size = Vector2(2, 0)
-layout_mode = 2
-size_flags_horizontal = 10
-theme_override_styles/panel = SubResource("StyleBoxFlat_jjvhh")
-
-[node name="Panel3" type="Panel" parent="PanelContainer/VBoxContainer/ProgressBar/HBoxContainer2"]
-custom_minimum_size = Vector2(2, 0)
-layout_mode = 2
-size_flags_horizontal = 10
-theme_override_styles/panel = SubResource("StyleBoxFlat_jjvhh")
-
-[node name="Panel4" type="Panel" parent="PanelContainer/VBoxContainer/ProgressBar/HBoxContainer2"]
-custom_minimum_size = Vector2(2, 0)
-layout_mode = 2
-size_flags_horizontal = 10
-theme_override_styles/panel = SubResource("StyleBoxFlat_jjvhh")
-
-[node name="Panel5" type="Panel" parent="PanelContainer/VBoxContainer/ProgressBar/HBoxContainer2"]
-custom_minimum_size = Vector2(2, 0)
-layout_mode = 2
-size_flags_horizontal = 10
-theme_override_styles/panel = SubResource("StyleBoxFlat_jjvhh")
-
-[node name="Panel6" type="Panel" parent="PanelContainer/VBoxContainer/ProgressBar/HBoxContainer2"]
-custom_minimum_size = Vector2(2, 0)
-layout_mode = 2
-size_flags_horizontal = 10
-theme_override_styles/panel = SubResource("StyleBoxFlat_jjvhh")
-
-[node name="Panel7" type="Panel" parent="PanelContainer/VBoxContainer/ProgressBar/HBoxContainer2"]
-custom_minimum_size = Vector2(2, 0)
-layout_mode = 2
-size_flags_horizontal = 10
-theme_override_styles/panel = SubResource("StyleBoxFlat_jjvhh")
-
-[node name="Panel8" type="Panel" parent="PanelContainer/VBoxContainer/ProgressBar/HBoxContainer2"]
-custom_minimum_size = Vector2(2, 0)
-layout_mode = 2
-size_flags_horizontal = 10
-theme_override_styles/panel = SubResource("StyleBoxFlat_jjvhh")
-
-[node name="Panel9" type="Panel" parent="PanelContainer/VBoxContainer/ProgressBar/HBoxContainer2"]
-custom_minimum_size = Vector2(2, 0)
-layout_mode = 2
-size_flags_horizontal = 10
-theme_override_styles/panel = SubResource("StyleBoxFlat_jjvhh")
-
-[node name="Panel10" type="Panel" parent="PanelContainer/VBoxContainer/ProgressBar/HBoxContainer2"]
-custom_minimum_size = Vector2(2, 0)
-layout_mode = 2
-size_flags_horizontal = 10
-theme_override_styles/panel = SubResource("StyleBoxFlat_jjvhh")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/ProgressBar"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/InputScroll/VBoxContainer"]
 layout_mode = 2
 
-[node name="LowerBPM" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="AddBar" type="Button" parent="PanelContainer/InputScroll/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 46
+text = "+"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/InputScroll/VBoxContainer"]
+layout_mode = 2
+
+[node name="LowerBPM2" type="Button" parent="PanelContainer/InputScroll/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "- -"
+
+[node name="LowerBPM" type="Button" parent="PanelContainer/InputScroll/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "-"
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/InputScroll/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "BPM : 40"
 horizontal_alignment = 1
 
-[node name="IncreaceBPM" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="IncreaceBPM" type="Button" parent="PanelContainer/InputScroll/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "+"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="DecreaseClicks" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer2"]
+[node name="IncreaceBPM2" type="Button" parent="PanelContainer/InputScroll/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "-"
+text = "+ +"
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-text = "Click
-Per Beat
-1"
-horizontal_alignment = 1
-
-[node name="IncreaceClicks" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "+"
-
-[node name="Pause" type="Button" parent="PanelContainer/VBoxContainer"]
+[node name="Pause" type="Button" parent="PanelContainer/InputScroll/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 46
 text = "II"
 
-[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/LowerBPM" to="." method="_on_lower_bpm_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/IncreaceBPM" to="." method="_on_increace_bpm_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer2/DecreaseClicks" to="." method="_on_decrease_clicks_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer2/IncreaceClicks" to="." method="_on_increace_clicks_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/Pause" to="." method="_on_pause_pressed"]
+[connection signal="pressed" from="PanelContainer/InputScroll/VBoxContainer/AddBar" to="." method="_on_add_bar_pressed"]
+[connection signal="pressed" from="PanelContainer/InputScroll/VBoxContainer/HBoxContainer/LowerBPM2" to="." method="_on_lower_bpm_2_pressed"]
+[connection signal="pressed" from="PanelContainer/InputScroll/VBoxContainer/HBoxContainer/LowerBPM" to="." method="_on_lower_bpm_pressed"]
+[connection signal="pressed" from="PanelContainer/InputScroll/VBoxContainer/HBoxContainer/IncreaceBPM" to="." method="_on_increace_bpm_pressed"]
+[connection signal="pressed" from="PanelContainer/InputScroll/VBoxContainer/HBoxContainer/IncreaceBPM2" to="." method="_on_increace_bpm_2_pressed"]
+[connection signal="pressed" from="PanelContainer/InputScroll/VBoxContainer/Pause" to="." method="_on_pause_pressed"]

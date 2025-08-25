@@ -6,4 +6,5 @@ bg_color = Color(0.905448, 0, 0.12363, 1)
 [node name="BeatPanel" type="Panel"]
 custom_minimum_size = Vector2(4, 0)
 size_flags_horizontal = 10
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_bo1nx")
