@@ -1,4 +1,4 @@
-extends VBoxContainer
+extends PanelContainer
 
 class_name Bar
 

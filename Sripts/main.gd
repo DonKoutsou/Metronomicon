@@ -23,7 +23,7 @@ func _ready() -> void:
 	CurrentBPM = StartingBPM
 	OnBPMChanged()
 	
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if (Paused or Bars.size() == 0):
 		return
 	

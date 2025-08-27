@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dcx7xrowv2hpx"]
+[gd_scene load_steps=4 format=3 uid="uid://dcx7xrowv2hpx"]
 
 [ext_resource type="Script" uid="uid://c3yy1aag6g380" path="res://Sripts/main.gd" id="1_bo1nx"]
+[ext_resource type="StyleBox" uid="uid://bgk7m71bdy3kb" path="res://UITheme/Panel.tres" id="2_8gbba"]
 [ext_resource type="Script" uid="uid://b0nd2jn3agump" path="res://Sripts/InputScroll.gd" id="2_bo1nx"]
 
 [node name="Main" type="Control" node_paths=PackedStringArray("BarParent", "BPMLabel")]
@@ -11,8 +12,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_bo1nx")
-BarParent = NodePath("PanelContainer/InputScroll/VBoxContainer/VBoxContainer2")
-BPMLabel = NodePath("PanelContainer/InputScroll/VBoxContainer/HBoxContainer/Label")
+BarParent = NodePath("PanelContainer/VBoxContainer/InputScroll/VBoxContainer2")
+BPMLabel = NodePath("PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/Label")
 BarScene = "uid://1e5ydqjjx32o"
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
@@ -22,62 +23,67 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = ExtResource("2_8gbba")
 
-[node name="InputScroll" type="ScrollContainer" parent="PanelContainer"]
-layout_mode = 2
-script = ExtResource("2_bo1nx")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/InputScroll"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-alignment = 1
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/InputScroll/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
 
-[node name="AddBar" type="Button" parent="PanelContainer/InputScroll/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 46
-text = "+"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/InputScroll/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="LowerBPM2" type="Button" parent="PanelContainer/InputScroll/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="AddBar" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "ADD BAR"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LowerBPM2" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "- -"
 
-[node name="LowerBPM" type="Button" parent="PanelContainer/InputScroll/VBoxContainer/HBoxContainer"]
+[node name="LowerBPM" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "-"
 
-[node name="Label" type="Label" parent="PanelContainer/InputScroll/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "BPM : 40"
 horizontal_alignment = 1
 
-[node name="IncreaceBPM" type="Button" parent="PanelContainer/InputScroll/VBoxContainer/HBoxContainer"]
+[node name="IncreaceBPM" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "+"
 
-[node name="IncreaceBPM2" type="Button" parent="PanelContainer/InputScroll/VBoxContainer/HBoxContainer"]
+[node name="IncreaceBPM2" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "+ +"
 
-[node name="Pause" type="Button" parent="PanelContainer/InputScroll/VBoxContainer"]
+[node name="Pause" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 46
-text = "II"
+text = "PAUSE"
 
-[connection signal="pressed" from="PanelContainer/InputScroll/VBoxContainer/AddBar" to="." method="_on_add_bar_pressed"]
-[connection signal="pressed" from="PanelContainer/InputScroll/VBoxContainer/HBoxContainer/LowerBPM2" to="." method="_on_lower_bpm_2_pressed"]
-[connection signal="pressed" from="PanelContainer/InputScroll/VBoxContainer/HBoxContainer/LowerBPM" to="." method="_on_lower_bpm_pressed"]
-[connection signal="pressed" from="PanelContainer/InputScroll/VBoxContainer/HBoxContainer/IncreaceBPM" to="." method="_on_increace_bpm_pressed"]
-[connection signal="pressed" from="PanelContainer/InputScroll/VBoxContainer/HBoxContainer/IncreaceBPM2" to="." method="_on_increace_bpm_2_pressed"]
-[connection signal="pressed" from="PanelContainer/InputScroll/VBoxContainer/Pause" to="." method="_on_pause_pressed"]
+[node name="InputScroll" type="ScrollContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("2_bo1nx")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/VBoxContainer/InputScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/AddBar" to="." method="_on_add_bar_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/LowerBPM2" to="." method="_on_lower_bpm_2_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/LowerBPM" to="." method="_on_lower_bpm_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/IncreaceBPM" to="." method="_on_increace_bpm_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/IncreaceBPM2" to="." method="_on_increace_bpm_2_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/Pause" to="." method="_on_pause_pressed"]

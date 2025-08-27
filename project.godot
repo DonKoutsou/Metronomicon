@@ -13,17 +13,22 @@ config_version=5
 config/name="Metronomicon"
 run/main_scene="uid://dcx7xrowv2hpx"
 config/features=PackedStringArray("4.4", "Mobile")
+run/max_fps=1000
+run/delta_smoothing=false
 config/icon="res://icon.svg"
 
 [display]
 
 window/size/viewport_width=357
 window/size/viewport_height=667
-window/frame_pacing/android/enable_frame_pacing=false
 window/frame_pacing/android/swappy_mode=0
 window/stretch/mode="viewport"
 window/handheld/orientation=1
 window/vsync/vsync_mode=0
+
+[gui]
+
+theme/custom="uid://cimttsymfrunc"
 
 [input]
 
@@ -32,6 +37,11 @@ Click={
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"canceled":false,"pressed":false,"double_click":false,"script":null)
 ]
 }
+
+[physics]
+
+common/physics_ticks_per_second=1000
+common/max_physics_steps_per_frame=100
 
 [rendering]
 

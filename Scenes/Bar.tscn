@@ -1,52 +1,38 @@
-[gd_scene load_steps=6 format=3 uid="uid://1e5ydqjjx32o"]
+[gd_scene load_steps=4 format=3 uid="uid://1e5ydqjjx32o"]
 
 [ext_resource type="Script" uid="uid://cih2o7t6f0nfc" path="res://Sripts/bar.gd" id="1_op7jc"]
 [ext_resource type="AudioStream" uid="uid://bi05j0bvm1mcy" path="res://Sounds/Metronome.mp3" id="2_2vt6c"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bo1nx"]
-bg_color = Color(0, 0, 0, 1)
-border_width_top = 18
-border_width_bottom = 18
-border_color = Color(0.8, 0.8, 0.8, 0)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8gbba"]
-border_width_top = 10
-border_width_bottom = 10
-border_color = Color(0.8, 0.8, 0.8, 0)
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_detail = 1
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jjvhh"]
 
-[node name="VBoxContainer" type="VBoxContainer" node_paths=PackedStringArray("ClickLabel", "BARUI", "BeatPanelParent", "ClickSound", "BarSound", "TimeLabel")]
+[node name="VBoxContainer" type="PanelContainer" node_paths=PackedStringArray("ClickLabel", "BARUI", "BeatPanelParent", "ClickSound", "BarSound", "TimeLabel")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-alignment = 1
 script = ExtResource("1_op7jc")
 BeatPanel = "uid://rvqfmt0odx5s"
-ClickLabel = NodePath("HBoxContainer2/Label")
-BARUI = NodePath("ProgressBar")
-BeatPanelParent = NodePath("ProgressBar/HBoxContainer")
-ClickSound = NodePath("AudioStreamPlayer")
-BarSound = NodePath("AudioStreamPlayer2")
-TimeLabel = NodePath("HBoxContainer/Label")
+ClickLabel = NodePath("VBoxContainer/HBoxContainer2/Label")
+BARUI = NodePath("VBoxContainer/ProgressBar")
+BeatPanelParent = NodePath("VBoxContainer/ProgressBar/HBoxContainer")
+ClickSound = NodePath("VBoxContainer/AudioStreamPlayer")
+BarSound = NodePath("VBoxContainer/AudioStreamPlayer2")
+TimeLabel = NodePath("VBoxContainer/HBoxContainer/Label")
 
-[node name="ProgressBar" type="ProgressBar" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer"]
 custom_minimum_size = Vector2(300.34, 40)
 layout_mode = 2
 size_flags_vertical = 1
 mouse_filter = 2
-theme_override_styles/background = SubResource("StyleBoxFlat_bo1nx")
-theme_override_styles/fill = SubResource("StyleBoxFlat_8gbba")
 value = 18.04
 show_percentage = false
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="ProgressBar"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/ProgressBar"]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -56,77 +42,77 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Panel" type="Panel" parent="ProgressBar/HBoxContainer2"]
+[node name="Panel" type="Panel" parent="VBoxContainer/ProgressBar/HBoxContainer2"]
 custom_minimum_size = Vector2(2, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_jjvhh")
 
-[node name="Panel2" type="Panel" parent="ProgressBar/HBoxContainer2"]
+[node name="Panel2" type="Panel" parent="VBoxContainer/ProgressBar/HBoxContainer2"]
 custom_minimum_size = Vector2(2, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_jjvhh")
 
-[node name="Panel3" type="Panel" parent="ProgressBar/HBoxContainer2"]
+[node name="Panel3" type="Panel" parent="VBoxContainer/ProgressBar/HBoxContainer2"]
 custom_minimum_size = Vector2(2, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_jjvhh")
 
-[node name="Panel4" type="Panel" parent="ProgressBar/HBoxContainer2"]
+[node name="Panel4" type="Panel" parent="VBoxContainer/ProgressBar/HBoxContainer2"]
 custom_minimum_size = Vector2(2, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_jjvhh")
 
-[node name="Panel5" type="Panel" parent="ProgressBar/HBoxContainer2"]
+[node name="Panel5" type="Panel" parent="VBoxContainer/ProgressBar/HBoxContainer2"]
 custom_minimum_size = Vector2(2, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_jjvhh")
 
-[node name="Panel6" type="Panel" parent="ProgressBar/HBoxContainer2"]
+[node name="Panel6" type="Panel" parent="VBoxContainer/ProgressBar/HBoxContainer2"]
 custom_minimum_size = Vector2(2, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_jjvhh")
 
-[node name="Panel7" type="Panel" parent="ProgressBar/HBoxContainer2"]
+[node name="Panel7" type="Panel" parent="VBoxContainer/ProgressBar/HBoxContainer2"]
 custom_minimum_size = Vector2(2, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_jjvhh")
 
-[node name="Panel8" type="Panel" parent="ProgressBar/HBoxContainer2"]
+[node name="Panel8" type="Panel" parent="VBoxContainer/ProgressBar/HBoxContainer2"]
 custom_minimum_size = Vector2(2, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_jjvhh")
 
-[node name="Panel9" type="Panel" parent="ProgressBar/HBoxContainer2"]
+[node name="Panel9" type="Panel" parent="VBoxContainer/ProgressBar/HBoxContainer2"]
 custom_minimum_size = Vector2(2, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_jjvhh")
 
-[node name="Panel10" type="Panel" parent="ProgressBar/HBoxContainer2"]
+[node name="Panel10" type="Panel" parent="VBoxContainer/ProgressBar/HBoxContainer2"]
 custom_minimum_size = Vector2(2, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_jjvhh")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ProgressBar"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ProgressBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -134,59 +120,59 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="DecreaseClicks" type="Button" parent="HBoxContainer2"]
+[node name="DecreaseClicks" type="Button" parent="VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "-"
 
-[node name="Label" type="Label" parent="HBoxContainer2"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "CLICKS : 1"
 horizontal_alignment = 1
 
-[node name="IncreaceClicks" type="Button" parent="HBoxContainer2"]
+[node name="IncreaceClicks" type="Button" parent="VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "+"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="LowerTime" type="Button" parent="HBoxContainer"]
+[node name="LowerTime" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "-"
 
-[node name="Label" type="Label" parent="HBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "TIME : 1"
 horizontal_alignment = 1
 
-[node name="IncreaceTime" type="Button" parent="HBoxContainer"]
+[node name="IncreaceTime" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "+"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="VBoxContainer"]
 stream = ExtResource("2_2vt6c")
 
-[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="VBoxContainer"]
 stream = ExtResource("2_2vt6c")
 pitch_scale = 0.8
 
-[node name="Button" type="Button" parent="."]
+[node name="Button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "X"
 
-[connection signal="pressed" from="HBoxContainer2/DecreaseClicks" to="." method="_on_decrease_clicks_pressed"]
-[connection signal="pressed" from="HBoxContainer2/IncreaceClicks" to="." method="_on_increace_clicks_pressed"]
-[connection signal="pressed" from="HBoxContainer/LowerTime" to="." method="_on_lower_time_pressed"]
-[connection signal="pressed" from="HBoxContainer/IncreaceTime" to="." method="_on_increace_time_pressed"]
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/DecreaseClicks" to="." method="_on_decrease_clicks_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/IncreaceClicks" to="." method="_on_increace_clicks_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/LowerTime" to="." method="_on_lower_time_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/IncreaceTime" to="." method="_on_increace_time_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]

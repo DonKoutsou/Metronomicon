@@ -1,0 +1,18 @@
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://cimttsymfrunc"]
+
+[ext_resource type="StyleBox" uid="uid://dbf58y6h43lm0" path="res://UITheme/ButtonNormal.tres" id="1_08l4d"]
+[ext_resource type="StyleBox" uid="uid://ciwnelxsnb6hv" path="res://UITheme/ButtonPressed.tres" id="2_h06ej"]
+[ext_resource type="StyleBox" uid="uid://bgk7m71bdy3kb" path="res://UITheme/Panel.tres" id="3_txsao"]
+[ext_resource type="StyleBox" uid="uid://cp4gslrhwmpgo" path="res://UITheme/ProgressBarBG.tres" id="3_wgauk"]
+[ext_resource type="StyleBox" uid="uid://bfjigpnjhymo3" path="res://UITheme/ProgressBarFill.tres" id="4_vu1dq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h06ej"]
+
+[resource]
+Button/styles/focus = SubResource("StyleBoxEmpty_h06ej")
+Button/styles/hover = ExtResource("1_08l4d")
+Button/styles/normal = ExtResource("1_08l4d")
+Button/styles/pressed = ExtResource("2_h06ej")
+PanelContainer/styles/panel = ExtResource("3_txsao")
+ProgressBar/styles/background = ExtResource("3_wgauk")
+ProgressBar/styles/fill = ExtResource("4_vu1dq")
