@@ -1,21 +1,11 @@
 [gd_scene load_steps=2 format=3 uid="uid://rvqfmt0odx5s"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bo1nx"]
-bg_color = Color(0.905448, 0, 0.12363, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_blend = true
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
+[ext_resource type="Script" uid="uid://cp7yjaq57cg6u" path="res://Sripts/BeatSpot.gd" id="1_lka6e"]
 
-[node name="BeatPanel" type="Panel"]
-custom_minimum_size = Vector2(4, 0)
+[node name="BeatSpot" type="Button"]
+custom_minimum_size = Vector2(10, 0)
 offset_right = 7.0
 offset_bottom = 11.0
 size_flags_horizontal = 10
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_bo1nx")
+toggle_mode = true
+script = ExtResource("1_lka6e")

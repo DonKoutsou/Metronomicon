@@ -1,10 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://dcx7xrowv2hpx"]
+[gd_scene load_steps=8 format=3 uid="uid://dcx7xrowv2hpx"]
 
 [ext_resource type="Script" uid="uid://c3yy1aag6g380" path="res://Sripts/main.gd" id="1_bo1nx"]
 [ext_resource type="StyleBox" uid="uid://bgk7m71bdy3kb" path="res://UITheme/Panel.tres" id="2_8gbba"]
 [ext_resource type="Script" uid="uid://b0nd2jn3agump" path="res://Sripts/InputScroll.gd" id="2_bo1nx"]
+[ext_resource type="AudioStream" uid="uid://bi05j0bvm1mcy" path="res://Sounds/Metronome.mp3" id="2_kry3j"]
+[ext_resource type="AudioStream" uid="uid://d0dn1wyryyjqr" path="res://Sounds/Bouzouki.mp3" id="3_21xkr"]
+[ext_resource type="AudioStream" uid="uid://cxp8fpwjam0r4" path="res://Sounds/Bouzouki2.mp3" id="4_6bp64"]
+[ext_resource type="PackedScene" uid="uid://tmlfp4s6vqyc" path="res://Scenes/sample_list.tscn" id="4_jjvhh"]
 
-[node name="Main" type="Control" node_paths=PackedStringArray("BarParent", "BPMLabel")]
+[node name="Main" type="Control" node_paths=PackedStringArray("BarParent", "BPMLabel", "PauseButton", "SList")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,8 +16,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_bo1nx")
+AvailableSamples = Dictionary[String, AudioStream]({
+"Bouzouki": ExtResource("3_21xkr"),
+"Bouzouki2": ExtResource("4_6bp64"),
+"Metronome": ExtResource("2_kry3j")
+})
 BarParent = NodePath("PanelContainer/VBoxContainer/InputScroll/VBoxContainer2")
 BPMLabel = NodePath("PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/Label")
+PauseButton = NodePath("PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/Pause")
+SList = NodePath("PanelContainer/SampleList")
 BarScene = "uid://1e5ydqjjx32o"
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
@@ -69,7 +80,7 @@ text = "+ +"
 
 [node name="Pause" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
-text = "PAUSE"
+text = "STOP"
 
 [node name="InputScroll" type="ScrollContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
@@ -80,6 +91,10 @@ script = ExtResource("2_bo1nx")
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="SampleList" parent="PanelContainer" instance=ExtResource("4_jjvhh")]
+visible = false
+layout_mode = 2
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/AddBar" to="." method="_on_add_bar_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/LowerBPM2" to="." method="_on_lower_bpm_2_pressed"]

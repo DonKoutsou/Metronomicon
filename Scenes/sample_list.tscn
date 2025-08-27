@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://tmlfp4s6vqyc"]
+
+[ext_resource type="Script" uid="uid://jiods5ajalqx" path="res://Sripts/sample_list.gd" id="1_gdxnn"]
+
+[node name="SampleList" type="PanelContainer" node_paths=PackedStringArray("ButtonParent")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gdxnn")
+ButtonParent = NodePath("VBoxContainer2")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+text = "SAMPLES"
+horizontal_alignment = 1

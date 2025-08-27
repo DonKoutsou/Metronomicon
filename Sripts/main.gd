@@ -4,10 +4,13 @@ class_name Main
 
 @export_group("Settings")
 @export var StartingBPM : int = 45
+@export var AvailableSamples : Dictionary[String, AudioStream]
 
 @export_group("Nodes")
 @export var BarParent : Control
 @export var BPMLabel : Label
+@export var PauseButton : Button
+@export var SList : SampleList
 
 @export_group("Scenes")
 @export_file() var BarScene : String
@@ -34,6 +37,10 @@ func _physics_process(delta: float) -> void:
 			CurrentlyProccessedBar = 0
 
 func _on_pause_pressed() -> void:
+	if (!Paused):
+		PauseButton.text = "START"
+	else:
+		PauseButton.text = "STOP"
 	Paused = !Paused
 
 
@@ -42,6 +49,7 @@ func _on_add_bar_pressed() -> void:
 	BarParent.add_child(NewBar)
 	Bars.append(NewBar)
 	NewBar.RemoveSelf.connect(OnBarRemoved.bind(NewBar))
+	NewBar.SampleSwitch.connect(OnSampleSwitchPressed.bind(NewBar))
 	NewBar.OnBPMChanged(CurrentBPM)
 
 func OnBarRemoved(B : Bar) -> void:
@@ -50,6 +58,15 @@ func OnBarRemoved(B : Bar) -> void:
 	CurrentlyProccessedBar = 0
 	for g in Bars:
 		g.Reset()
+
+func OnSampleSwitchPressed(B : Bar) -> void:
+	Paused = true
+	SList.visible = true
+	SList.SetSamples(AvailableSamples)
+	var sample = await SList.OnSampleSelected
+	B.ChangeSample(AvailableSamples.find_key(sample), sample)
+	SList.visible = false
+	Paused = false
 
 func _on_increace_bpm_pressed() -> void:
 	CurrentBPM += 1

@@ -12,11 +12,15 @@ class_name Bar
 @export var ClickLabel : Label
 @export var BARUI : ProgressBar
 @export var BeatPanelParent : Control
-@export var ClickSound : AudioStreamPlayer
 @export var BarSound : AudioStreamPlayer
 @export var TimeLabel : Label
+@export var SampleNameLabel : Label
 
 signal RemoveSelf
+signal SampleSwitch
+
+var MuttedBeats : Array[int]
+var BeatsSpots : Array [BeatSpot]
 
 var CurrentBarLeangth : float
 var CurrentClicksPerBeat : int
@@ -30,15 +34,27 @@ func _ready() -> void:
 	CurrentClicksPerBeat = StartingClicksPerBeat
 	OnClicksPerBeatChanged()
 
+func ChangeSample(SampleName : String, Sample : AudioStream) -> void:
+	SampleNameLabel.text = SampleName
+	BarSound.stream = Sample
+
 func Update(delta : float) -> bool:
 	
 	if (ClickInterval > CurrentClickLeangth):
 		ClickInterval -= CurrentClickLeangth
-		CurrentClick += 1
-		if (CurrentClick == CurrentClicksPerBeat):
+		
+		if (!MuttedBeats.has(CurrentClick)):
+			var pan = BeatsSpots[CurrentClick]
+			pan.Bounce()
+			
+			if (CurrentClick + 1 == CurrentClicksPerBeat):
+				BarSound.pitch_scale = randf_range(0.79, 0.81)
+			else:
+				BarSound.pitch_scale = randf_range(0.99, 1.01)
+				
 			BarSound.play()
-		else:
-			ClickSound.play()
+		
+		CurrentClick += 1
 		
 	if (Interval > CurrentBarLeangth):
 		Interval -= CurrentBarLeangth
@@ -66,17 +82,30 @@ func OnBPMChanged(NewBpm : int) -> void:
 func OnClicksPerBeatChanged() -> void:
 	Reset()
 	
+	MuttedBeats.clear()
+	BeatsSpots.clear()
+	
 	CurrentClickLeangth = CurrentBarLeangth / CurrentClicksPerBeat
 	
-	ClickLabel.text = "CLICKS : {0}".format([CurrentClicksPerBeat])
+	ClickLabel.text = "BEATS PER BAR : {0}".format([CurrentClicksPerBeat])
 	
 	for g in BeatPanelParent.get_children():
 		g.queue_free()
 		
 	for g in CurrentClicksPerBeat:
-		var Pan = load(BeatPanel).instantiate()
+		var Pan = load(BeatPanel).instantiate() as Button
 		BeatPanelParent.add_child(Pan)
+		Pan.pressed.connect(BeatPressed.bind(g))
+		BeatsSpots.append(Pan)
+		
 
+func BeatPressed(BeatIndex : int) -> void:
+	if (MuttedBeats.has(BeatIndex)):
+		MuttedBeats.erase(BeatIndex)
+		#BeatPanelParent.get_child(BeatIndex).disabled = false
+	else:
+		MuttedBeats.append(BeatIndex)
+		#BeatPanelParent.get_child(BeatIndex).disabled = true
 
 func Reset() -> void:
 	Interval = 0
@@ -100,9 +129,12 @@ func _on_button_pressed() -> void:
 
 func _on_lower_time_pressed() -> void:
 	T = max(1, T - 1)
-	TimeLabel.text = "TIME : {0}".format([T])
+	TimeLabel.text = "SPEED : {0}".format([T])
 
 func _on_increace_time_pressed() -> void:
 	T += 1
-	TimeLabel.text = "TIME : {0}".format([T])
+	TimeLabel.text = "SPEED : {0}".format([T])
 	
+
+func _on_sample_button_pressed() -> void:
+	SampleSwitch.emit()
