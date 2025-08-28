@@ -4,7 +4,7 @@ class_name Main
 
 @export_group("Settings")
 @export var StartingBPM : int = 45
-@export var AvailableSamples : Dictionary[String, AudioStream]
+@export var StartingSamples : Dictionary[String, AudioStream]
 
 @export_group("Nodes")
 @export var BarParent : Control
@@ -15,6 +15,7 @@ class_name Main
 @export_group("Scenes")
 @export_file() var BarScene : String
 
+var AvailableSamples : Dictionary[String, AudioStream]
 var CurrentBPM : int
 
 var Bars : Array[Bar]
@@ -23,12 +24,19 @@ var CurrentlyProccessedBar : int = 0
 var Paused : bool = false
 
 func _ready() -> void:
+	OS.request_permissions()
+
 	CurrentBPM = StartingBPM
 	OnBPMChanged()
+	
+	for g in StartingSamples.keys():
+		AvailableSamples[g] = StartingSamples[g]
+		
 	var s = SaveLoadManager.GetInstance().LoadSamples()
 	print("Loaded {0} samples".format([s.size()]))
 	for g in s.keys():
 		AvailableSamples[g] = s[g]
+	
 	
 func _physics_process(delta: float) -> void:
 	if (Paused or Bars.size() == 0):
@@ -100,3 +108,14 @@ func OnBPMChanged() -> void:
 func _on_sample_list_on_sample_loaded(Sample: AudioStream, Name : String) -> void:
 	AvailableSamples[Name] = Sample
 	SaveLoadManager.GetInstance().SaveSample(Sample, Name)
+
+
+func _on_sample_list_on_samples_cleared() -> void:
+	SaveLoadManager.GetInstance().ClearSamples()
+	
+	AvailableSamples.clear()
+	
+	for g in StartingSamples.keys():
+		AvailableSamples[g] = StartingSamples[g]
+	
+	SList.SetSamples(AvailableSamples)

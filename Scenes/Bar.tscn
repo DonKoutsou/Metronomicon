@@ -1,44 +1,56 @@
-[gd_scene load_steps=4 format=3 uid="uid://1e5ydqjjx32o"]
+[gd_scene load_steps=5 format=3 uid="uid://1e5ydqjjx32o"]
 
 [ext_resource type="Script" uid="uid://cih2o7t6f0nfc" path="res://Sripts/bar.gd" id="1_op7jc"]
 [ext_resource type="AudioStream" uid="uid://bi05j0bvm1mcy" path="res://Sounds/Metronome.mp3" id="2_2vt6c"]
+[ext_resource type="Texture2D" uid="uid://b7b4tkk1oy6cf" path="res://Assets/gears.png" id="2_24mt1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jjvhh"]
 
-[node name="VBoxContainer" type="PanelContainer" node_paths=PackedStringArray("ClickLabel", "BARUI", "BeatPanelParent", "BarSound", "TimeLabel", "SampleNameLabel")]
+[node name="VBoxContainer" type="PanelContainer" node_paths=PackedStringArray("ClickLabel", "BARUI", "BeatPanelParent", "BarSound", "TimeLabel", "SampleNameLabel", "SettingsPanel")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -175.0
-offset_top = -59.0
-offset_right = 175.0
-offset_bottom = 59.0
+offset_left = -174.5
+offset_top = -27.5
+offset_right = 175.5
+offset_bottom = 28.5
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_vertical = 4
 mouse_filter = 2
 script = ExtResource("1_op7jc")
 BeatPanel = "uid://rvqfmt0odx5s"
-ClickLabel = NodePath("VBoxContainer/HBoxContainer4/VBoxContainer/HBoxContainer2/Label")
+ClickLabel = NodePath("VBoxContainer/HBoxContainer4/PanelContainer/VBoxContainer/HBoxContainer2/Label")
 BARUI = NodePath("VBoxContainer/HBoxContainer3/PanelContainer/ProgressBar")
 BeatPanelParent = NodePath("VBoxContainer/HBoxContainer3/PanelContainer/ProgressBar/HBoxContainer")
 BarSound = NodePath("VBoxContainer/AudioStreamPlayer")
-TimeLabel = NodePath("VBoxContainer/HBoxContainer4/VBoxContainer/HBoxContainer/Label")
-SampleNameLabel = NodePath("VBoxContainer/HBoxContainer4/VBoxContainer2/SampleName")
+TimeLabel = NodePath("VBoxContainer/HBoxContainer4/PanelContainer/VBoxContainer/HBoxContainer/Label")
+SampleNameLabel = NodePath("VBoxContainer/HBoxContainer4/PanelContainer2/VBoxContainer2/SampleName")
+SettingsPanel = NodePath("VBoxContainer/HBoxContainer4")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 1
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+icon = ExtResource("2_24mt1")
+expand_icon = true
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/HBoxContainer3/PanelContainer"]
-custom_minimum_size = Vector2(300.34, 40)
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -135,74 +147,85 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Button" type="Button" parent="VBoxContainer/HBoxContainer3"]
-custom_minimum_size = Vector2(30, 0)
+custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
+theme_override_font_sizes/font_size = 15
 text = "X"
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
+theme_override_constants/separation = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer4"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/HBoxContainer4/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer4/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/HBoxContainer4/PanelContainer/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="DecreaseClicks" type="Button" parent="VBoxContainer/HBoxContainer4/VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(30, 0)
+[node name="DecreaseClicks" type="Button" parent="VBoxContainer/HBoxContainer4/PanelContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 text = "-"
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer4/VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(100, 0)
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer4/PanelContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 15
-text = "BEATS PER BAR : 1"
+text = "BEATS PER BAR:1"
 horizontal_alignment = 1
 
-[node name="IncreaceClicks" type="Button" parent="VBoxContainer/HBoxContainer4/VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(30, 0)
+[node name="IncreaceClicks" type="Button" parent="VBoxContainer/HBoxContainer4/PanelContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 text = "+"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer4/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer4/PanelContainer/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="LowerTime" type="Button" parent="VBoxContainer/HBoxContainer4/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(30, 0)
+[node name="LowerTime" type="Button" parent="VBoxContainer/HBoxContainer4/PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 text = "-"
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer4/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(100, 0)
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer4/PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 15
 text = "SPEED : 1"
 horizontal_alignment = 1
 
-[node name="IncreaceTime" type="Button" parent="VBoxContainer/HBoxContainer4/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(30, 0)
+[node name="IncreaceTime" type="Button" parent="VBoxContainer/HBoxContainer4/PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 text = "+"
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer4"]
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/HBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="SampleName" type="Label" parent="VBoxContainer/HBoxContainer4/VBoxContainer2"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer4/PanelContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SampleName" type="Label" parent="VBoxContainer/HBoxContainer4/PanelContainer2/VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 15
 text = "METRONOME"
-horizontal_alignment = 1
+vertical_alignment = 1
 clip_text = true
 
-[node name="SampleButton" type="Button" parent="VBoxContainer/HBoxContainer4/VBoxContainer2"]
+[node name="SampleButton" type="Button" parent="VBoxContainer/HBoxContainer4/PanelContainer2/VBoxContainer2"]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 15
@@ -212,9 +235,10 @@ expand_icon = true
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="VBoxContainer"]
 stream = ExtResource("2_2vt6c")
 
+[connection signal="pressed" from="VBoxContainer/HBoxContainer3/Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer3/Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer4/VBoxContainer/HBoxContainer2/DecreaseClicks" to="." method="_on_decrease_clicks_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer4/VBoxContainer/HBoxContainer2/IncreaceClicks" to="." method="_on_increace_clicks_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer4/VBoxContainer/HBoxContainer/LowerTime" to="." method="_on_lower_time_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer4/VBoxContainer/HBoxContainer/IncreaceTime" to="." method="_on_increace_time_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer4/VBoxContainer2/SampleButton" to="." method="_on_sample_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer4/PanelContainer/VBoxContainer/HBoxContainer2/DecreaseClicks" to="." method="_on_decrease_clicks_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer4/PanelContainer/VBoxContainer/HBoxContainer2/IncreaceClicks" to="." method="_on_increace_clicks_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer4/PanelContainer/VBoxContainer/HBoxContainer/LowerTime" to="." method="_on_lower_time_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer4/PanelContainer/VBoxContainer/HBoxContainer/IncreaceTime" to="." method="_on_increace_time_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer4/PanelContainer2/VBoxContainer2/SampleButton" to="." method="_on_sample_button_pressed"]

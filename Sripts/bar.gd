@@ -15,6 +15,7 @@ class_name Bar
 @export var BarSound : AudioStreamPlayer
 @export var TimeLabel : Label
 @export var SampleNameLabel : Label
+@export var SettingsPanel : Control
 
 signal RemoveSelf
 signal SampleSwitch
@@ -87,7 +88,7 @@ func OnClicksPerBeatChanged() -> void:
 	
 	CurrentClickLeangth = CurrentBarLeangth / CurrentClicksPerBeat
 	
-	ClickLabel.text = "BEATS PER BAR : {0}".format([CurrentClicksPerBeat])
+	ClickLabel.text = "BEATS PER BAR:{0}".format([CurrentClicksPerBeat])
 	
 	for g in BeatPanelParent.get_children():
 		g.queue_free()
@@ -138,3 +139,7 @@ func _on_increace_time_pressed() -> void:
 
 func _on_sample_button_pressed() -> void:
 	SampleSwitch.emit()
+
+
+func _on_button_2_pressed() -> void:
+	SettingsPanel.visible = !SettingsPanel.visible

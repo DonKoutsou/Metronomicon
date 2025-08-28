@@ -14,7 +14,7 @@ func SaveSample(Sample : AudioStream, Name : String) -> void:
 	var file : SampleListFile
 	if (FileAccess.file_exists("user://SampleList.tres")):
 		file = load("user://SampleList.tres")
-	else:
+	if (file == null):
 		file = SampleListFile.new()
 	
 	file.List[Name] = Sample
@@ -31,3 +31,11 @@ func LoadSamples() -> Dictionary[String, AudioStream]:
 		return {}
 		
 	return file.List
+
+func ClearSamples() -> void:
+	if (!FileAccess.file_exists("user://SampleList.tres")):
+		print("Couldn't find save file")
+		return
+	else:
+		DirAccess.remove_absolute("user://SampleList.tres")
+	
