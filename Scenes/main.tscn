@@ -102,3 +102,4 @@ layout_mode = 2
 [connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/IncreaceBPM" to="." method="_on_increace_bpm_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/IncreaceBPM2" to="." method="_on_increace_bpm_2_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/Pause" to="." method="_on_pause_pressed"]
+[connection signal="OnSampleLoaded" from="PanelContainer/SampleList" to="." method="_on_sample_list_on_sample_loaded"]

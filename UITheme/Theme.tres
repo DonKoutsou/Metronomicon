@@ -1,5 +1,6 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://cimttsymfrunc"]
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://cimttsymfrunc"]
 
+[ext_resource type="StyleBox" uid="uid://brhci74jg34yr" path="res://UITheme/ButtonHover.tres" id="1_3hj4t"]
 [ext_resource type="StyleBox" uid="uid://dbf58y6h43lm0" path="res://UITheme/ButtonNormal.tres" id="1_08l4d"]
 [ext_resource type="StyleBox" uid="uid://ciwnelxsnb6hv" path="res://UITheme/ButtonPressed.tres" id="2_h06ej"]
 [ext_resource type="StyleBox" uid="uid://bgk7m71bdy3kb" path="res://UITheme/Panel.tres" id="3_txsao"]
@@ -10,7 +11,7 @@
 
 [resource]
 Button/styles/focus = SubResource("StyleBoxEmpty_h06ej")
-Button/styles/hover = ExtResource("1_08l4d")
+Button/styles/hover = ExtResource("1_3hj4t")
 Button/styles/normal = ExtResource("1_08l4d")
 Button/styles/pressed = ExtResource("2_h06ej")
 PanelContainer/styles/panel = ExtResource("3_txsao")

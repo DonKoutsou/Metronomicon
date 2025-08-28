@@ -2,19 +2,45 @@
 
 [ext_resource type="Script" uid="uid://jiods5ajalqx" path="res://Sripts/sample_list.gd" id="1_gdxnn"]
 
-[node name="SampleList" type="PanelContainer" node_paths=PackedStringArray("ButtonParent")]
+[node name="SampleList" type="PanelContainer" node_paths=PackedStringArray("ButtonParent", "FileDialogue")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_gdxnn")
-ButtonParent = NodePath("VBoxContainer2")
+ButtonParent = NodePath("VBoxContainer/VBoxContainer2")
+FileDialogue = NodePath("FileDialog")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer2"]
+[node name="LOAD" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "LOAD SAMPLE"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/VBoxContainer2"]
 layout_mode = 2
 text = "SAMPLES"
 horizontal_alignment = 1
+
+[node name="FileDialog" type="FileDialog" parent="."]
+mode = 3
+title = "Load Sample"
+initial_position = 2
+size = Vector2i(317, 592)
+always_on_top = true
+force_native = true
+ok_button_text = "Open"
+dialog_hide_on_ok = true
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.wav", "*.mp3")
+show_hidden_files = true
+use_native_dialog = true
+
+[connection signal="pressed" from="VBoxContainer/LOAD" to="." method="_on_load_pressed"]
+[connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]

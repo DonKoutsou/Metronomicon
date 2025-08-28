@@ -25,6 +25,10 @@ var Paused : bool = false
 func _ready() -> void:
 	CurrentBPM = StartingBPM
 	OnBPMChanged()
+	var s = SaveLoadManager.GetInstance().LoadSamples()
+	print("Loaded {0} samples".format([s.size()]))
+	for g in s.keys():
+		AvailableSamples[g] = s[g]
 	
 func _physics_process(delta: float) -> void:
 	if (Paused or Bars.size() == 0):
@@ -43,6 +47,9 @@ func _on_pause_pressed() -> void:
 		PauseButton.text = "STOP"
 	Paused = !Paused
 
+func _input(event: InputEvent) -> void:
+	if (event.is_action_pressed("Pause")):
+		_on_pause_pressed()
 
 func _on_add_bar_pressed() -> void:
 	var NewBar = load(BarScene).instantiate() as Bar
@@ -89,3 +96,7 @@ func OnBPMChanged() -> void:
 	for g in Bars:
 		g.OnBPMChanged(CurrentBPM)
 		
+
+func _on_sample_list_on_sample_loaded(Sample: AudioStream, Name : String) -> void:
+	AvailableSamples[Name] = Sample
+	SaveLoadManager.GetInstance().SaveSample(Sample, Name)
