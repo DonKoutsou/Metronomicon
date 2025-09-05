@@ -119,3 +119,15 @@ func _on_sample_list_on_samples_cleared() -> void:
 		AvailableSamples[g] = StartingSamples[g]
 	
 	SList.SetSamples(AvailableSamples)
+
+var LastTap : float
+
+func _on_tapbpm_pressed() -> void:
+	var NewTime = Time.get_ticks_msec()
+	if (LastTap > 0):
+		var dif = NewTime - LastTap
+		print("Tap differance is {0} ms. Setting BPM to {1}".format([dif, 60000 / dif]))
+		CurrentBPM = 60000 / dif
+		OnBPMChanged()
+		
+	LastTap = Time.get_ticks_msec()

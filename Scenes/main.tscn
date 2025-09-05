@@ -89,6 +89,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "+ +"
 
+[node name="tapbpm" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "TAP"
+
 [node name="Pause" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 text = "STOP"
@@ -102,6 +107,7 @@ layout_mode = 2
 [connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/LowerBPM" to="." method="_on_lower_bpm_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/IncreaceBPM" to="." method="_on_increace_bpm_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/IncreaceBPM2" to="." method="_on_increace_bpm_2_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/tapbpm" to="." method="_on_tapbpm_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer/VBoxContainer/Pause" to="." method="_on_pause_pressed"]
 [connection signal="OnSampleLoaded" from="PanelContainer/SampleList" to="." method="_on_sample_list_on_sample_loaded"]
 [connection signal="OnSamplesCleared" from="PanelContainer/SampleList" to="." method="_on_sample_list_on_samples_cleared"]
