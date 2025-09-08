@@ -54,6 +54,7 @@ func Update(delta : float) -> bool:
 			
 			var sound = DeletableSound.new()
 			sound.stream = CurrentSample
+			sound.volume_db = -6
 			
 			if (CurrentClick + 1 == CurrentClicksPerBeat):
 				sound.pitch_scale = randf_range(0.79, 0.81)
