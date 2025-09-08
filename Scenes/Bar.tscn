@@ -6,7 +6,7 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jjvhh"]
 
-[node name="VBoxContainer" type="PanelContainer" node_paths=PackedStringArray("ClickLabel", "BARUI", "BeatPanelParent", "BarSound", "TimeLabel", "SampleNameLabel", "SettingsPanel")]
+[node name="VBoxContainer" type="PanelContainer" node_paths=PackedStringArray("ClickLabel", "BARUI", "BeatPanelParent", "TimeLabel", "SampleNameLabel", "SettingsPanel")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -25,7 +25,7 @@ BeatPanel = "uid://rvqfmt0odx5s"
 ClickLabel = NodePath("VBoxContainer/HBoxContainer4/PanelContainer/VBoxContainer/HBoxContainer2/Label")
 BARUI = NodePath("VBoxContainer/HBoxContainer3/PanelContainer/ProgressBar")
 BeatPanelParent = NodePath("VBoxContainer/HBoxContainer3/PanelContainer/ProgressBar/HBoxContainer")
-BarSound = NodePath("VBoxContainer/AudioStreamPlayer")
+StartingSample = ExtResource("2_2vt6c")
 TimeLabel = NodePath("VBoxContainer/HBoxContainer4/PanelContainer/VBoxContainer/HBoxContainer/Label")
 SampleNameLabel = NodePath("VBoxContainer/HBoxContainer4/PanelContainer2/VBoxContainer2/SampleName")
 SettingsPanel = NodePath("VBoxContainer/HBoxContainer4")

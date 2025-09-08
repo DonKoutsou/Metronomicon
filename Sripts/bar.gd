@@ -12,13 +12,15 @@ class_name Bar
 @export var ClickLabel : Label
 @export var BARUI : ProgressBar
 @export var BeatPanelParent : Control
-@export var BarSound : AudioStreamPlayer
+@export var StartingSample : AudioStream
 @export var TimeLabel : Label
 @export var SampleNameLabel : Label
 @export var SettingsPanel : Control
 
 signal RemoveSelf
 signal SampleSwitch
+
+var CurrentSample : AudioStream
 
 var MuttedBeats : Array[int]
 var BeatsSpots : Array [BeatSpot]
@@ -34,10 +36,12 @@ var T : int = 1
 func _ready() -> void:
 	CurrentClicksPerBeat = StartingClicksPerBeat
 	OnClicksPerBeatChanged()
+	CurrentSample = StartingSample
 
 func ChangeSample(SampleName : String, Sample : AudioStream) -> void:
 	SampleNameLabel.text = SampleName
-	BarSound.stream = Sample
+	CurrentSample = Sample
+	#BarSound.stream = Sample
 
 func Update(delta : float) -> bool:
 	
@@ -48,12 +52,16 @@ func Update(delta : float) -> bool:
 			var pan = BeatsSpots[CurrentClick]
 			pan.Bounce()
 			
+			var sound = DeletableSound.new()
+			sound.stream = CurrentSample
+			
 			if (CurrentClick + 1 == CurrentClicksPerBeat):
-				BarSound.pitch_scale = randf_range(0.79, 0.81)
+				sound.pitch_scale = randf_range(0.79, 0.81)
 			else:
-				BarSound.pitch_scale = randf_range(0.99, 1.01)
-				
-			BarSound.play()
+				sound.pitch_scale = randf_range(0.99, 1.01)
+			
+			add_child(sound)
+			sound.play()
 		
 		CurrentClick += 1
 		
